@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        table td {
+            border: 1px solid black;
+            font-size: 30px;
+            padding: 10px;
+            text-align: center;
+        }
+        table tr:first-child td:first-child {
+            background-color: red;
+        }
+        table tr:first-child td:nth-child(2) {
+            color: blue;
+            font-style: italic;
+        }
+    </style>
+    <body>
+        <div>
+            <h2>Task 1</h2>
+            <table>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <h2>Task 2</h2>
+            <form action="" method="POST">
+                <label for="color">Select color:</label>
+                <input type="color" id="color" name="color" />
+                <label for="number">Input number of cell:</label>
+                <input type="number" id="number" name="number" />
+                <button type="submit" id="subBut">Выполнить</button>
+            </form>
+        </div>
+        <div>
+            <h2>Task 3</h2>
+            <p>
+                SELECT col.fullname, col.birth_date, learning.score FROM col
+                INNER JOIN learning ON col.id = learning.col_id where
+                col.subdivision_name = 'Бухгалтерия' and learning.course_name =
+                'excel' and learning.score>80;
+            </p>
+        </div>
+
+        <div>
+            <h2>Task 4</h2>
+            <p>Код проекта:</p>
+            <pre>
+                <code>
+                    &lt;p>Task 4</p>
+                    <%
+                    all_cols = XQuery("collaborators");
+                    cols_amount = ArrayCount(all_cols);
+                    %>
+
+                    &lt;table>
+                        &lt;tr>
+                            &lt;th>ФИО&lt;/th>
+                            &lt;th>Дата рождения&lt;/th>
+                            &lt;th>Адрес электронной почты&lt;/th>
+                            &lt;th>Логин&lt;/th>
+                            &lt;th>Наименование организации, к которой прикреплен сотрудник&lt;/th>
+                            &lt;th>Наименование региона, к которому принадлежит организация&lt;/th>
+                        &lt;/tr>
+                        <%for(col in all_cols) {%>
+                        &lt;tr>
+                            &lt;td><%=col.fullname%>&lt;/td>
+                            &lt;td><%=col.birth_date%>&lt;/td>
+                            &lt;td><%=col.email%>&lt;/td>
+                            &lt;td><%=col.login%>&lt;/td>
+                            &lt;td><%=col.org_name%>&lt;/td>
+                            &lt;td><%=col.region_id%>&lt;/td>
+                        &lt;/tr>
+                        <% } %>
+                    &lt;/table>
+                    </code>
+            </pre>
+            <p>Скрин:</p>
+            <img src="Screenshot_1.png" alt="screen" width="50%">
+        </div>
+
+        <script>
+            let but = document.getElementById("subBut");
+
+            let color = document.getElementById("color");
+            let cells = document.querySelectorAll("td");
+
+            but.onclick = function (e) {
+                e.preventDefault();
+
+                for (let i = 0; i < cells.length; i++) {
+                    cells[i].style.backgroundColor = color.value;
+                    cells[i].style.color = "black";
+                }
+
+                let number = document.getElementById("number").value;
+                if (number > 0 && number < 13) {
+                    cells[number - 1].style.backgroundColor = "white";
+                    cells[number - 1].style.color = "blue";
+                } else alert("Введите число в диапазоне 1..12");
+            };
+        </script>
+    </body>
+</html>
